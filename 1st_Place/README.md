@@ -1,61 +1,119 @@
-# Instructions
+# Introduction
+============
 
-DOC.tar.gz is full solution except model weights (.h5). Size is about 800 MB. It contains all code and predictions (.npy). So after downloading this archive it is possible to run all actions except inference. Model weights are in 6 separate archives. Total size is about 65 GB. Largest part is about 18 GB.
+Solution package contains not only model weights but also all predictions
+so it is possible to compute all scores and prediction stats (e.g. correlation)
+without training and inference. Also there is an experiment database
+where I collected scores and experiment parameters.
+Commands and their explanation are listed in section "STEPS" below
 
-So first we download DOC.tar.gz and extract it. Then rename “models_copy_without_weights” directory just to align with code from instructions:
+```
+"DOC/models" dir contains 54 subdirs corresponding to each individual
+    model (experiment) included in final solution.
+    51 of 54 - the best private score
+    22 of 54 - smaller ensemble which also reached 1st place
+        (except additional 3 models it is intersected with 51)
+All 54 supplied models follow exactly the same experiment design (all scores are directly comparable):
+    5 folds (split is based on storm id)
+    10 predictions from each fold for val and 10 predictions for test
+    10 predictions are: 1 original image and 9 test-time augmentations:
+        h-flip, v-flip, and rotations multiple of 45 degrees
+As a result each experiment folder contains:
+    single code file "run.py" (code structure is the same for all experiments)
+    5 model weights files corresponding to the best epoch in each fold
+        Best epoch may be different across folds, but not greater than max value
+        specified in settings in each "run.py" file (mostly 15 or 20).
+    "preds" dir with 100 .npy files containing predictions for val and test
+Each "run.py" is a self-contained experiment file to run all jobs (--help option is supported):
+        train
+        predict val set
+        compute val scores
+        predict test set
+        create submission .csv
+    Each file 'run.py' follows the same structure and has same command line arguments.
+    The most important parts is model definition ("init_model" function) and
+    data reading ("parse_example" function).
+Term "single model" means self-ensemble of all folds and all TTA.
+Model file name description (e.g. model-best-f0-e014-8.7136.h5)
+    f0 - fold id (from 0 to 4)
+    e014 - number of epochs trained in fact (mostly not greater than 15 or 20)
+    8.7136 - score for given fold computed with predictions on original val images (no TTA)
+Ensemble computation
+    Ensemble is formulated as weighted arithmetic average
+    optimized using pair-wise greedy search over sorted predictions.
+    Concept is the following:
+        Sort predictions from all models based on CV score
+            in descending order. Smallest (i.e. best) value is last.
+            Predictions from each TTA are sorted independently.
+        Find best coefficients for pair of 1st and 2nd prediction, then apply these coefficients and compute result
+        Find best coefficients for pair of previous result and 3rd prediction, and so on
+Data creation
+    Script "create_cv_split.py" creates validation split i.e. it creates file "train_cv.csv" with "fold_id" column.
+        All my experiments were run in the same setup using same split, so all scores are directly comparable.
+        If organizers are interested to compare some of their own models with mine they can retrain them using this split.
+    Script "run_data_creation_in_parallel.sh" has section "Loading original competition data"
+        where expired links must be replaced with valid ones
+    There are 15 datasets total
+    Each dataset creation is performed in 2 stages:
+        compile examples with previous frames and save on disk
+        then write these examples in TFRecord files split by fold
+    There are 4 different scripts corresponding to 4 different concepts of TFREcord example creation:
+        each example is 1-channel image (original)
+        each example is 3-channel image, one channel is current frame and 2 others are historical frames taken with some step
+        each example is 3-channel image, each channel is mean of some range of historical frames
+        each example is a list of some number of 1-channel image (original), i.e. current and several previous historical frames
+    Each of 4 scripts has 'Compliance check' section in code. If uncommented
+        these print statements show what files (previous frames) are used in fact to create given example
+    Parallel processing was tested on machine with
+        16 cores, 16 GB RAM and 1 TB free space (required) on HDD and took about 5 hours to complete.
+        SSD disk should speed up this process.
+Training parameters
+    All training parameters (batch_size, learning_rate) are optimized for TPUv3-8.
+    For most of the models these parameters will hold on 8x V100 GPU with mixed precision.
+    For a single GPU batch size and learning rate should be reduced proportionally.
+    Also gradient accumulation can be used (not implemented in my solution).
+    Some training batch size values for reference:
+                                                TPUv3-8     P100
+    CNN, EfficientNet-B7                        192         12
+    CNN-LSTM, 24 frames, EfficientNet-B3        64          4
+Experiment database
+    DOC/meta/experiment_database contains experiment statistics
+```
 
-curl -L -o DOC.tar.gz https://www.dropbox.com/s/aq3o491mqp8ns4i/DOC.tar.gz?dl=0
-tar xzf DOC.tar.gz
-cd DOC
-mv models_copy_without_weights models
+# Directory structure and description
+===================================
 
-We are on clean Ubuntu 18.04.
-We need to replace "requirements.txt" with a new version and install Python packages:
-
-cd ~/DOC/src
-curl -L -o requirements.txt https://www.dropbox.com/s/syj8nwyum4r64fg/requirements.txt?dl=0
-sudo apt-get update
-sudo apt-get -y install python3-pip
-pip3 install --upgrade pip
-pip3 install -r requirements.txt
-
-Now we need to download competition CSV files. At the current stage we don't need images.
-(The following code is included in "DOC/src/data/run_data_creation_in_parallel.sh".)
-
-cd ~/DOC/data
-curl -L -o submission_format.csv <link>
-curl -L -o training_set_features.csv <link>
-curl -L -o training_set_labels.csv <link>
-curl -L -o test_set_features.csv <link>
-
-Finally let's create CSV files containing training labels and describing CV split (i.e. fold ids):
-
-cd ~/DOC/src/data
-python3 create_cv_split.py --data_dir=../../data
-
-Now we are ready to compute ensembles and any model scores.
-
-cd ~/DOC/src/ensemble
-python3 ensemble.py --ens_id=51
-
-At the current point we can run all steps which do not require model weights i.e. compute ensemble submission, compute CV scores for each model, create data, retrain models.
-
-DOC/meta/STEPS_TO_REPRODUCE.sh – all instructions to reproduce solution. This is Section 2
-DOC/meta/ WRITEUP.doc – solution write up i.e. answers to questions from Section 3
-DOC/meta/experiment_database – organized results and parameters of my experiments
-DOC/meta/experiment_database/experiment_database.ipynb – usage example
-
-To run inference we need model weights. Before downloading the weights we need to rename “models” directory and create new empty “models” directory, then download 6 parts in “models” directory and extract. Nothing needs to be copied from old “models” directory.
-
-cd DOC
-mv models models_copy_without_weights
-mkdir models
-cd models
-curl -L -o models_part_1.tar.gz https://www.dropbox.com/s/sxqzrbpasyq4zee/models_part_1.tar.gz?dl=0
-curl -L -o models_part_2.tar.gz https://www.dropbox.com/s/9oygxzbdbbghzol/models_part_2.tar.gz?dl=0
-curl -L -o models_part_3.tar.gz https://www.dropbox.com/s/c04pim7dnh3nqta/models_part_3.tar.gz?dl=0
-curl -L -o models_part_4.tar.gz https://www.dropbox.com/s/64i3lqrrahbm5i7/models_part_4.tar.gz?dl=0
-curl -L -o models_part_5.tar.gz https://www.dropbox.com/s/u10o1f55bd8occ3/models_part_5.tar.gz?dl=0
-curl -L -o models_part_6.tar.gz https://www.dropbox.com/s/9ar614n85dq04mu/models_part_6.tar.gz?dl=0
-tar xzf models_part_*.tar.gz
-
+```
+DOC/
+    LICENSE.txt
+    data/
+    meta/
+        experiment_database/
+        STEPS_TO_REPRODUCE.sh
+        WRITEUP.doc
+    models/
+        run-20210104-2157/
+            preds/
+                y_pred_val_fold_0_tta_0.npy
+                ...
+                y_pred_test_fold_4_tta_9.npy
+                y_pred_test_fold_0_tta_0.npy
+                ...
+                y_pred_val_fold_4_tta_9.npy
+            model-best-f0-e014-8.7136.h5
+            ...
+            model-best-f4-e014-8.5117.h5
+            run.py
+        ...
+        run-20210131-1951/
+    models_copy_without_weights/
+        <same structure as "models" but without weights>
+    src/
+        data/
+            ...
+        ensemble/
+            ensemble.py
+        requirements.txt
+        vecxoz_utils.py
+    weights_3rd_party/
+```

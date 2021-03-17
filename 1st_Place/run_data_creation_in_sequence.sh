@@ -25,10 +25,10 @@ pip3 install -r requirements.txt
 echo "***** IMPORTANT: Please insert correct csv file links"
 echo "***** Download and extract all competition data (csv and images)..."
 cd $HOME/DOC/data
-curl -L -o submission_format.csv "https://drivendata-prod.s3.amazonaws.com/data/72/public/submission_format.csv?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIARVBOBDCYVI2LMPSY%2F20210228%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20210228T224725Z&X-Amz-Expires=86400&X-Amz-SignedHeaders=host&X-Amz-Signature=22e90693a2329345cb997982455d6052f37ca2f9f4f470def7710e43f82b5e6c"
-curl -L -o training_set_features.csv "https://drivendata-prod.s3.amazonaws.com/data/72/public/training_set_features.csv?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIARVBOBDCYVI2LMPSY%2F20210228%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20210228T224725Z&X-Amz-Expires=86400&X-Amz-SignedHeaders=host&X-Amz-Signature=869b2ea169227301823e6cd42dbc26a39ff6503f125c19f864f6e35ccde3413e"
-curl -L -o training_set_labels.csv "https://drivendata-prod.s3.amazonaws.com/data/72/public/training_set_labels.csv?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIARVBOBDCYVI2LMPSY%2F20210228%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20210228T224725Z&X-Amz-Expires=86400&X-Amz-SignedHeaders=host&X-Amz-Signature=58eada87266b55859febefc2b60031b463d0f1443676b7f08968eb367221ed52"
-curl -L -o test_set_features.csv "https://drivendata-prod.s3.amazonaws.com/data/72/public/test_set_features.csv?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIARVBOBDCYVI2LMPSY%2F20210228%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20210228T224725Z&X-Amz-Expires=86400&X-Amz-SignedHeaders=host&X-Amz-Signature=6518a28682743eae2a7b721a99f84a26aa543cce6cd870ffb4a8db8e258ad2c3"
+curl -L -o submission_format.csv "INSERT LINK"
+curl -L -o training_set_features.csv "INSERT LINK"
+curl -L -o training_set_labels.csv "INSERT LINK"
+curl -L -o test_set_features.csv "INSERT LINK"
 curl -L -o re-train-images.tgz https://drivendata-public-assets-eu.s3.eu-central-1.amazonaws.com/re-train-images.tgz
 curl -L -o re-test-images.tgz https://drivendata-public-assets-eu.s3.eu-central-1.amazonaws.com/re-test-images.tgz
 tar xzf re-train-images.tgz
