@@ -106,8 +106,8 @@ Experiment database
 # Getting started
 
 1. Installing dependencies, downloading weights, downloading and processing data:
-Ubuntu 18.04 with preinstalled CUDA 11.0 and cuDNN 8.0.4.
 
+Ubuntu 18.04 with preinstalled CUDA 11.0 and cuDNN 8.0.4.
 2 cores, 8 GB RAM, 1 TB SSD
 Expected runtime: about 20 hours
 
