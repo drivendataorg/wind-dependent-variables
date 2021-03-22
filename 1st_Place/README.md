@@ -126,7 +126,7 @@ cd $HOME
 bash run_inference_8x_V100.sh
 ```
 
-3. Run ensemble
+3. Run ensemble:
 
 Expected runtime: < 1 min
 
