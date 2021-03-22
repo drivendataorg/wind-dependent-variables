@@ -1,11 +1,38 @@
-# Introduction
-============
+# Directory structure
 
-Solution package contains not only model weights but also all predictions
-so it is possible to compute all scores and prediction stats (e.g. correlation)
-without training and inference. Also there is an experiment database
-where I collected scores and experiment parameters.
-Commands and their explanation are listed in section "STEPS" below
+```
+LICENSE.txt
+ensemble_v2.py
+run_data_creation_in_sequence.sh
+run_inference_8x_V100.sh
+run_inference_TPUv3_8.sh
+DOC/
+    meta/
+        experiment_database/
+            experiment_database.csv
+            experiment_database.ipynb
+            experiment_metadata.md
+        STEPS_TO_REPRODUCE.sh
+    models/
+        run-20210104-2157/
+            run.py
+        run-20210131-1951/
+        ...
+    src/
+        data/
+            ...
+        ensemble/
+            ensemble.py
+        requirements.txt
+        vecxoz_utils.py
+    weights_3rd_party/
+        INFO.md
+```
+
+
+# Introduction
+
+Commands and their explanation are listed below. Pre-computed model weight corresponding to the best epoch in each fold (not greater than max value specified in settings in each "run.py" file) can be downloaded to `DOC/models` from `s3://drivendata-competition-radiant-earth/1st_place/`. Predictions for val and test (.npy) are not currently available.
 
 ```
 "DOC/models" dir contains 54 subdirs corresponding to each individual
@@ -20,10 +47,6 @@ All 54 supplied models follow exactly the same experiment design (all scores are
         h-flip, v-flip, and rotations multiple of 45 degrees
 As a result each experiment folder contains:
     single code file "run.py" (code structure is the same for all experiments)
-    5 model weights files corresponding to the best epoch in each fold
-        Best epoch may be different across folds, but not greater than max value
-        specified in settings in each "run.py" file (mostly 15 or 20).
-    "preds" dir with 100 .npy files containing predictions for val and test
 Each "run.py" is a self-contained experiment file to run all jobs (--help option is supported):
         train
         predict val set
@@ -78,42 +101,4 @@ Training parameters
     CNN-LSTM, 24 frames, EfficientNet-B3        64          4
 Experiment database
     DOC/meta/experiment_database contains experiment statistics
-```
-
-# Directory structure and description
-===================================
-
-```
-DOC/
-    LICENSE.txt
-    data/
-    meta/
-        experiment_database/
-        STEPS_TO_REPRODUCE.sh
-        WRITEUP.doc
-    models/
-        run-20210104-2157/
-            preds/
-                y_pred_val_fold_0_tta_0.npy
-                ...
-                y_pred_test_fold_4_tta_9.npy
-                y_pred_test_fold_0_tta_0.npy
-                ...
-                y_pred_val_fold_4_tta_9.npy
-            model-best-f0-e014-8.7136.h5
-            ...
-            model-best-f4-e014-8.5117.h5
-            run.py
-        ...
-        run-20210131-1951/
-    models_copy_without_weights/
-        <same structure as "models" but without weights>
-    src/
-        data/
-            ...
-        ensemble/
-            ensemble.py
-        requirements.txt
-        vecxoz_utils.py
-    weights_3rd_party/
 ```
