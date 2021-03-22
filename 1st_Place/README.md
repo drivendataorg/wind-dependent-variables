@@ -32,7 +32,7 @@ DOC/
 
 # Introduction
 
-Commands and their explanations are listed below. Pre-computed model weight corresponding to the best epoch in each fold (not greater than max value specified in settings in each "run.py" file) can be downloaded to `DOC/models` from `s3://drivendata-competition-radiant-earth/1st_place/`. Predictions for val and test (.npy) are not currently available.
+Commands and their explanations are listed below. Pre-computed model weight corresponding to the best epoch in each fold (not greater than max value specified in settings in each "run.py" file) can be downloaded to `DOC/models` from `s3://drivendata-competition-radiant-earth/1st_place/`. 3rd party weights can be downloaded to `DOC/weights_3rd_party` from the link provided in "INFO.md". Predictions for val and test (.npy) are not available for download.
 
 ```
 "DOC/models" dir contains 54 subdirs corresponding to each individual
