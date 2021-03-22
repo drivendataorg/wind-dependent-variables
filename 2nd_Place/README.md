@@ -21,9 +21,9 @@ In the final stage, ensemble selection [10] is applied to combine the best group
 
 ## Prerequisites
 
-Firstly, you need to have 
+Firstly, you need to have
 
-* Ubuntu 18.04 
+* Ubuntu 18.04
 * Python 3.6.9
 * Jupyter
 * 32G RAM + 64G Swap
@@ -70,7 +70,7 @@ Data files (training_set_features.csv, test_set_features.csv and submission_form
 
 ### Archive
 
-* archive.zip: it has weights and predictions of all first stage models trained on my local machine to generate the final submission.
+* archive.zip: pre-computed weights for all first stage models can be downloaded to the top level directory from s3://drivendata-competition-radiant-earth/2nd_place/
 
 ## Running
 
