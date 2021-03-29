@@ -1,3 +1,7 @@
+# Introduction
+
+Commands and their explanations are listed below. Pre-computed model weight corresponding to the best epoch in each fold (not greater than max value specified in settings in each "run.py" file) as well as intermediate predictions for val and test (.npy) can be downloaded to `DOC/models` from `s3://drivendata-competition-radiant-earth/1st_place/`. 3rd party weights can be downloaded to `DOC/weights_3rd_party` from the link provided in "INFO.md".
+
 # Directory structure
 
 ```
@@ -29,10 +33,44 @@ DOC/
         INFO.md
 ```
 
+# Getting started
 
-# Introduction
+1. Installing dependencies, downloading weights, downloading and processing data:  
 
-Commands and their explanations are listed below. Pre-computed model weight corresponding to the best epoch in each fold (not greater than max value specified in settings in each "run.py" file) can be downloaded to `DOC/models` from `s3://drivendata-competition-radiant-earth/1st_place/`. 3rd party weights can be downloaded to `DOC/weights_3rd_party` from the link provided in "INFO.md". Predictions for val and test (.npy) are not available for download.
+Ubuntu 18.04 with preinstalled CUDA 11.0 and cuDNN 8.0.4.  
+2 cores, 8 GB RAM, 1 TB SSD  
+Expected runtime: about 20 hours  
+
+```
+cd $HOME
+bash run_data_creation_in_sequence.sh
+```
+
+2. Run inference:  
+
+32 cores, 120 GB RAM, 1 TB SSD, 8x V100 GPU  
+Expected runtime on full test set (44k): about 100 hours  
+
+```
+cd $HOME
+bash run_inference_8x_V100.sh
+```
+
+3. Run ensemble:  
+
+Expected runtime: < 1 min  
+
+```
+cd $HOME
+python3 ensemble_v2.py \
+--data_dir=$HOME/DOC/data \
+--model_dir=$HOME/DOC/models \
+--out_dir=./ \
+--ens_id=51
+```
+
+
+# Additional Instructions  
 
 ```
 "DOC/models" dir contains 54 subdirs corresponding to each individual
@@ -101,40 +139,4 @@ Training parameters
     CNN-LSTM, 24 frames, EfficientNet-B3        64          4
 Experiment database
     DOC/meta/experiment_database contains experiment statistics
-```
-
-# Getting started
-
-1. Installing dependencies, downloading weights, downloading and processing data:
-
-Ubuntu 18.04 with preinstalled CUDA 11.0 and cuDNN 8.0.4.
-2 cores, 8 GB RAM, 1 TB SSD
-Expected runtime: about 20 hours
-
-```
-cd $HOME
-bash run_data_creation_in_sequence.sh
-```
-
-2. Run inference:
-
-32 cores, 120 GB RAM, 1 TB SSD, 8x V100 GPU
-Expected runtime on full test set (44k): about 100 hours
-
-```
-cd $HOME
-bash run_inference_8x_V100.sh
-```
-
-3. Run ensemble:
-
-Expected runtime: < 1 min
-
-```
-cd $HOME
-python3 ensemble_v2.py \
---data_dir=$HOME/DOC/data \
---model_dir=$HOME/DOC/models \
---out_dir=./ \
---ens_id=51
 ```
