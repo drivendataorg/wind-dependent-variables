@@ -1,0 +1,33 @@
+[[source]]
+url = "https://pypi.python.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[[source]]
+name = "pytorch"
+url = "https://download.pytorch.org/whl/cu101"
+verify_ssl = false
+
+[packages]
+tqdm = "==4.56.0"
+pandas = "==1.1.5"
+numpy = "==1.19.5"
+pillow = "==8.1.0"
+scikit-learn = "==0.24.1"
+scikit-image = "==0.17.2"
+opencv-python = "*"#"==4.4.0.46"
+#torch = {file = "https://download.pytorch.org/whl/cu101/torch-1.7.1%2Bcu101-cp36-cp36m-linux_x86_64.whl"}
+#torchvision = {file = "https://download.pytorch.org/whl/cu101/torchvision-0.8.1%2Bcu101-cp36-cp36m-linux_x86_64.whl"}
+#torch = {index = "pytorch",version = "==1.7.1"}
+#torchvision = {index = "pytorch",version = "==0.8.2"}
+#pretrainedmodels = "==0.7.4"
+click = "==7.1.2"
+lightgbm = "==3.1.1"
+
+[dev-packages]
+
+[requires]
+python_version = "3.6"
+
+[pipenv]
+allow_prereleases = true
