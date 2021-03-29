@@ -2,6 +2,8 @@
 
 Commands and their explanations are listed below. Pre-computed model weight corresponding to the best epoch in each fold (not greater than max value specified in settings in each "run.py" file) as well as intermediate predictions for val and test (.npy) can be downloaded to `DOC/models` from `s3://drivendata-competition-radiant-earth/1st_place/`. 3rd party weights can be downloaded to `DOC/weights_3rd_party` from the link provided in "INFO.md".
 
+The best submission (LB 6.2558) is an ensemble of 51 models. A smaller ensemble of 22 models achieves similar performance (LB 6.3046). These models are specified in `ensemble_v2.py`. See `reports/DrivenData-Competition-Winner-Documentation-1st.pdf` for additional solution details. Practical tips for using subsets of the winning model are outlined in `DOC/meta/STEPS_TO_REPRODUCE.sh`.
+
 # Directory structure
 
 ```
@@ -70,7 +72,7 @@ python3 ensemble_v2.py \
 ```
 
 
-# Additional Instructions  
+# Additional instructions  
 
 ```
 "DOC/models" dir contains 54 subdirs corresponding to each individual
