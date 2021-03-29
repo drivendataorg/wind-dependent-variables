@@ -1,12 +1,12 @@
 # Wind-dependent Variables: Predict Wind Speeds of Tropical Storms
-This repo includes code for [Daniel_FG](https://www.drivendata.org/users/Daniel_FG/) 3rd place competition 
-[Wind-dependent Variables: Predict Wind Speeds of Tropical Storms](https://www.drivendata.org/competitions/72/predict-wind-speeds/page/274/)
+This repo includes code for [Daniel_FG](https://www.drivendata.org/users/Daniel_FG/), 3rd place
+Competition: [Wind-dependent Variables: Predict Wind Speeds of Tropical Storms](https://www.drivendata.org/competitions/72/predict-wind-speeds/page/274/)
 
 
 ## Solution Summary
 
 The approach is based on two layer pipeline, where the first layer are 14 CNN 
-based regression models and the second one a GBM model adding extra features to the first layer predictions and past predictions.
+based regression models and the second one a GBM model adding extra features to the first layer predictions and past predictions. Pre-computed model weights can be downloaded to `Wind_Tropical_Storms/src/models` from `s3://drivendata-competition-radiant-earth/3rd_place/`. A smaller ensemble of 4 models achieves similar performance. See `reports/DrivenData-Competition-Winner-Documentation-3rd.pdf` for additional solution details.
 
 **First layer models**
 
