@@ -32,24 +32,24 @@ Additional solution details, including tips for using subsets of the winning mod
 **Benchmark Blog Post: [How to use Deep Learning to Predict Tropical Storm Wind Speeds](https://www.drivendata.co/blog/predict-wind-speeds-benchmark/)**
 
 ### Competition Convener 
-<img src="_sponsors/radiantearth.png" width="270"/>
+<img src="_sponsors/radiantearth.png" width="300"/>
 
 ## Competition Sponsors
 
 ### Convenining Sponsor
-<img src="_sponsors/nasa.png" width="140"/>
+<img src="_sponsors/nasa.png" width="160"/>
 
 ### Gold Sponsors
-<img src="_sponsors/aws.png" width="130"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="_sponsors/devseed.png" width="405"/>
+<img src="_sponsors/aws.png" width="117"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="_sponsors/devseed.png" width="365"/>
 
 ### Silver Sponsors
-<img src="_sponsors/azavea.png" width="290"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="_sponsors/element84.png" width="310"/>
+<img src="_sponsors/azavea.png" width="260"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="_sponsors/element84.png" width="280"/>
 
 ### Azure Credit Sponsor
-<img src="_sponsors/microsoft.png" width="375"/>
+<img src="_sponsors/microsoft.png" width=338/>
 
 ### Technical Sponsor
-<img src="_sponsors/esi.jpeg" width="110"/>
+<img src="_sponsors/esi.jpeg" width="120"/>
 
 
 
