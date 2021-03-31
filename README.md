@@ -30,3 +30,26 @@ Place | Team or User | Public Score | Private Score | Summary of Model
 Additional solution details, including tips for using subsets of the winning models, can be found in the `reports` folder inside the directory for each submission. To request access to pre-computed survey weights and/or intermediate predictions where applicable, please [contact us](https://www.drivendata.org/contact/).
 
 **Benchmark Blog Post: [How to use Deep Learning to Predict Tropical Storm Wind Speeds](https://www.drivendata.co/blog/predict-wind-speeds-benchmark/)**
+
+### Competition Convener 
+<img src="_sponsors/radiantearth.png" width="270"/>
+
+## Competition Sponsors
+
+### Convenining Sponsor
+<img src="_sponsors/nasa.png" width="140"/>
+
+### Gold Sponsors
+<img src="_sponsors/aws.png" width="130"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="_sponsors/devseed.png" width="405"/>
+
+### Silver Sponsors
+<img src="_sponsors/azavea.png" width="290"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="_sponsors/element84.png" width="310"/>
+
+### Azure Credit Sponsor
+<img src="_sponsors/microsoft.png" width="375"/>
+
+### Technical Sponsor
+<img src="_sponsors/esi.jpeg" width="110"/>
+
+
+
