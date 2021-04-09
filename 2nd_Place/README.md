@@ -1,6 +1,6 @@
 # Predicting Wind Speeds of Tropical Storms using Stack of Multi-Step CNNs
 
-Second place solution for Wind-dependent Variables: Predict Wind Speeds of Tropical Storms.  
+Second place solution for Wind-dependent Variables: Predict Wind Speeds of Tropical Storms.
 
 Note: Pre-computed model weights (`archive.zip`) can be downloaded to the top level directory from `s3://drivendata-competition-radiant-earth/2nd_place/`.
 
@@ -72,7 +72,7 @@ Data files (training_set_features.csv, test_set_features.csv and submission_form
 
 ### Archive
 
-* archive.zip: pre-computed weights for all first stage models can be downloaded to the top level directory from s3://drivendata-competition-radiant-earth/2nd_place/
+* archive.zip: pre-computed weights for all first stage models can be downloaded to the top level directory from a private s3 bucket. To request access, please [contact us](https://www.drivendata.org/contact/).
 
 ## Running
 

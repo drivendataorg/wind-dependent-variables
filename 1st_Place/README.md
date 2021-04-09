@@ -1,6 +1,6 @@
 # Introduction
 
-Commands and their explanations are listed below. Pre-computed model weights corresponding to the best epoch in each fold (not greater than max value specified in settings in each "run.py" file) as well as intermediate predictions for val and test (.npy) can be downloaded to `DOC/models` from `s3://drivendata-competition-radiant-earth/1st_place/`. 3rd party weights can be downloaded to `DOC/weights_3rd_party` from the link provided in "INFO.md".
+Commands and their explanations are listed below. Pre-computed model weights corresponding to the best epoch in each fold (not greater than max value specified in settings in each "run.py" file) as well as intermediate predictions for val and test (.npy) can be downloaded to `DOC/models` from a private s3 bucket. To request access, please [contact us](https://www.drivendata.org/contact/). 3rd party weights can be downloaded to `DOC/weights_3rd_party` from the link provided in "INFO.md".
 
 The best submission (LB 6.2558) is an ensemble of 51 models. A smaller ensemble of 22 models achieves similar performance (LB 6.3046). These models are specified in `ensemble_v2.py`. See `reports/DrivenData-Competition-Winner-Documentation-1st.pdf` for additional solution details. Practical tips for using subsets of the winning model are outlined in `DOC/meta/STEPS_TO_REPRODUCE.sh`.
 
@@ -37,30 +37,30 @@ DOC/
 
 # Getting started
 
-1. Installing dependencies, downloading weights, downloading and processing data:  
+1. Installing dependencies, downloading weights, downloading and processing data:
 
-Ubuntu 18.04 with preinstalled CUDA 11.0 and cuDNN 8.0.4.  
-2 cores, 8 GB RAM, 1 TB SSD  
-Expected runtime: about 20 hours  
+Ubuntu 18.04 with preinstalled CUDA 11.0 and cuDNN 8.0.4.
+2 cores, 8 GB RAM, 1 TB SSD
+Expected runtime: about 20 hours
 
 ```
 cd $HOME
 bash run_data_creation_in_sequence.sh
 ```
 
-2. Run inference:  
+2. Run inference:
 
-32 cores, 120 GB RAM, 1 TB SSD, 8x V100 GPU  
-Expected runtime on full test set (44k): about 100 hours  
+32 cores, 120 GB RAM, 1 TB SSD, 8x V100 GPU
+Expected runtime on full test set (44k): about 100 hours
 
 ```
 cd $HOME
 bash run_inference_8x_V100.sh
 ```
 
-3. Run ensemble:  
+3. Run ensemble:
 
-Expected runtime: < 1 min  
+Expected runtime: < 1 min
 
 ```
 cd $HOME
@@ -72,7 +72,7 @@ python3 ensemble_v2.py \
 ```
 
 
-# Additional instructions  
+# Additional instructions
 
 ```
 "DOC/models" dir contains 54 subdirs corresponding to each individual

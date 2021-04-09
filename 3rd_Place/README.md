@@ -1,16 +1,16 @@
 # Wind-dependent Variables: Predict Wind Speeds of Tropical Storms
-This repo includes code for [Daniel_FG](https://www.drivendata.org/users/Daniel_FG/), 3rd place  
-Competition: [Wind-dependent Variables: Predict Wind Speeds of Tropical Storms](https://www.drivendata.org/competitions/72/predict-wind-speeds/page/274/)  
+This repo includes code for [Daniel_FG](https://www.drivendata.org/users/Daniel_FG/), 3rd place
+Competition: [Wind-dependent Variables: Predict Wind Speeds of Tropical Storms](https://www.drivendata.org/competitions/72/predict-wind-speeds/page/274/)
 
 
 ## Solution Summary
 
-The approach is based on two layer pipeline, where the first layer are 14 CNN 
-based regression models and the second one is a GBM model adding extra features to the first layer predictions and past predictions. Pre-computed model weights can be downloaded to `Wind_Tropical_Storms/src/models` from `s3://drivendata-competition-radiant-earth/3rd_place/`. A smaller ensemble of 4 models achieves similar performance. See `reports/DrivenData-Competition-Winner-Documentation-3rd.pdf` for additional solution details.
+The approach is based on two layer pipeline, where the first layer are 14 CNN
+based regression models and the second one is a GBM model adding extra features to the first layer predictions and past predictions. Pre-computed model weights can be downloaded to `Wind_Tropical_Storms/src/models` from a private s3 bucket. To request access, please [contact us](https://www.drivendata.org/contact/). A smaller ensemble of 4 models achieves similar performance. See `reports/DrivenData-Competition-Winner-Documentation-3rd.pdf` for additional solution details.
 
 **First layer models**
 
-The first layer is trained over a stratified 4 k-folds split scheme. 
+The first layer is trained over a stratified 4 k-folds split scheme.
 
 |        | **Desc.**                                                          | **CV RMSE** |
 | ------ | ------------------------------------------------------------------ | ----------- |
@@ -33,7 +33,7 @@ The first layer is trained over a stratified 4 k-folds split scheme.
 
 **Second layer models**
 
-This lightGBM model is used to predict wind speed based on 1st level models predictions and 
+This lightGBM model is used to predict wind speed based on 1st level models predictions and
 other features:
 - 1st level predictions at time t
 - 1st level predictions at time t-1, t-2, t-4, t-6, t-8, t-10, t-12, t-16, t-20, t-24
@@ -85,7 +85,7 @@ Software prerequisites:
 
 Clone this repository and  install requirements from project root:
 
-`pipenv install` 
+`pipenv install`
 
 I couldn't install pytorch for cuda 10.1 from pipenv, so needed to install it using pip:
 
@@ -101,9 +101,9 @@ Download data from https://www.drivendata.org/competitions/72/predict-wind-speed
 
     │
     ├── data
-    │    │    
+    │    │
     │    ├── test               <- Test set images.
-    │    │    
+    │    │
     │    ├── train              <- Training set images.
     │    │
     │    ├── 4Kfolds_202012220741.csv
@@ -116,8 +116,8 @@ Download data from https://www.drivendata.org/competitions/72/predict-wind-speed
     │    │
     │    └── training_set_labels.csv
 
-This directory already contains a file `4Kfolds_202012220741.csv` with the 4-folds data split scheme used for 
-cross validation and stacking level-1 predictions.  
+This directory already contains a file `4Kfolds_202012220741.csv` with the 4-folds data split scheme used for
+cross validation and stacking level-1 predictions.
 
 ### Train models and make predictions
 
@@ -127,14 +127,14 @@ If you complied with all the prerequisites just run:
 
 ### Run inference using L1 weights
 
-If saved weights of L1 models are already in `models` folder, you can skip the step of 
+If saved weights of L1 models are already in `models` folder, you can skip the step of
 training those L1 models running:
 
 `bash predict_from_L1weights.sh`
 
 ### Final submission
 
-It triggers the training and prediction on the test set. 
-When the script has finished running you'll find the prediction in `predictions` folder. 
+It triggers the training and prediction on the test set.
+When the script has finished running you'll find the prediction in `predictions` folder.
 The final submission would be `L2A_FINAL_submission.csv`.
 
