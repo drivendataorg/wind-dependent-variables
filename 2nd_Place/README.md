@@ -2,7 +2,7 @@
 
 Second place solution for Wind-dependent Variables: Predict Wind Speeds of Tropical Storms.
 
-Note: Pre-computed model weights (`archive.zip`) can be downloaded to the top level directory from `s3://drivendata-competition-radiant-earth/2nd_place/`.
+Note: Pre-computed model weights (`archive.zip`) can be downloaded to the top level directory from a private s3 bucket. To request access, please [contact us](https://www.drivendata.org/contact/).
 
 ## Summary of Approach
 
