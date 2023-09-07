@@ -7,6 +7,7 @@
 # Wind-dependent Variables: Predict Wind Speeds of Tropical Storms
 
 ## Goal of the Competition
+
 Tropical cyclones are one of the costliest natural disasters globally. Hurricanes can cause upwards of 1,000 deaths and $50 billion in damages in a single event, and have been responsible for well over 160,000 deaths in recent history. An accurate diagnostic model for tropical cyclones is critical for disaster preparedness and response.
 
 According to the National Oceanic and Atmospheric Administration (NOAA), storm damage models approximate risk using an exponential or power of wind speed. Today, forecasters estimate the maximum sustained surface wind speed, or intensity, of tropical cyclones using adaptations of a satellite image-based classification method, known as the Dvorak technique. These techniques involve visual inspection of images and are limited by human subjectivity in assessing complex cloud features. There remains a vital need to develop automated, objective, and accurate tropical cyclone intensity estimation tools from readily available satellite image data.
@@ -15,7 +16,7 @@ The goal of this challenge is to estimate the wind speeds of storms at different
 
 ## What's in this Repository
 
-This repository contains code from winning competitors in the [Wind-dependent Variables: Predict Wind Speeds of Tropical Storms](https://www.drivendata.org/competitions/72/predict-wind-speeds/) DrivenData challenge.
+This repository contains code from winning competitors in the [Wind-dependent Variables: Predict Wind Speeds of Tropical Storms](https://www.drivendata.org/competitions/72/predict-wind-speeds/) DrivenData challenge. Code for all winning solutions are open source under the MIT License.
 
 **Winning code for other DrivenData competitions is available in the [competition-winners repository](https://github.com/drivendataorg/competition-winners).**
 
@@ -28,6 +29,8 @@ Place | Team or User | Public Score | Private Score | Summary of Model
 3   | [Daniel_FG](https://www.drivendata.org/users/Daniel_FG/) | 6.839 | 6.456 | Fine-tune 14 models on sequences of 8 or 12 3-channel images with CNN, RNN, GRU, and Transformer architectures, using different backbones and different historical depths. Fine-tune one model using Optical Flow Vectors from a sequence of 5 images spaced 1 hour apart. Backbones include VGG-11, VGG-16, ResNeXt101, SE_Resnet152, and SE_ResNeXt101. Multi-channel images are created from repeating a single channel or concatenating a monochrome image with two prior timesteps of varying depths using a block sampling strategy. Initial features are 244 x 244 pixel images with flip, rotation, and crop augmentations. Train a lightGBM on intermediate predictions, predictions from times t-1 through t-24, ocean, and relative time metadata to output final predictions.
 
 Additional solution details, including tips for using subsets of the winning models, can be found in the `reports` folder inside the directory for each submission. To request access to pre-computed survey weights and/or intermediate predictions where applicable, please [contact us](https://www.drivendata.org/contact/).
+
+**Winners Announcement: [Meet the Winners of Wind-dependent Variables](https://drivendata.co/blog/wind-dependent-variables-winners/)**
 
 **Benchmark Blog Post: [How to use Deep Learning to Predict Tropical Storm Wind Speeds](https://www.drivendata.co/blog/predict-wind-speeds-benchmark/)**
 
